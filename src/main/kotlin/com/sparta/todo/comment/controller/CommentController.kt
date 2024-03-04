@@ -1,5 +1,11 @@
 package com.sparta.todo.comment.controller
 
+import com.sparta.todo.comment.dto.CommentResponse
+import com.sparta.todo.comment.dto.CreateCommentRequest
+import com.sparta.todo.comment.dto.UpdateCommentRequest
+import com.sparta.todo.comment.service.CommentService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 
@@ -7,14 +13,12 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class CommentController (
     private val commentService: CommentService
-){
-
+) {
     @PostMapping
     fun createComment(
         @RequestParam todoId: Long,
         @RequestBody createCommentRequest: CreateCommentRequest
     ): ResponseEntity<CommentResponse> {
-
         val result = commentService.createComment(todoId, createCommentRequest)
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -33,11 +37,10 @@ class CommentController (
             .body(updateComment)
     }
 
-    @DeleteMapping(" /{commentId}")
+    @DeleteMapping("/{commentId}")
     fun deleteComment(
         @PathVariable commentId: Long
     ): ResponseEntity<String> {
-
         commentService.deleteComment(commentId)
         val deleteCommentSuccessMessage = "댓글이 성공적으로 삭제되었습니다."
 
@@ -47,4 +50,3 @@ class CommentController (
 
     }
 }
-)
