@@ -1,5 +1,7 @@
 package com.sparta.todo.comment.service
 
+import com.sparta.todo.comment.dto.CommentResponse
+
 interface CommentService {
     fun createComment(todoId: Long, nickname: String, content: String)
 
@@ -7,5 +9,5 @@ interface CommentService {
 
     fun deleteComment(commentId: Long)
 
-    fun getComment(commentId: Long)
+    fun getCommentById(commentId: Long): Comment
 }

@@ -5,6 +5,8 @@ import com.sparta.todo.comment.dto.CreateCommentRequest
 import com.sparta.todo.comment.dto.UpdateCommentRequest
 import com.sparta.todo.comment.model.Comment
 import com.sparta.todo.comment.repository.CommentRepository
+import com.sparta.todo.global.exception.ModelNotFoundException
+import com.sparta.todo.global.exception.TargetNotFoundException
 import com.sparta.todo.todo.repository.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -15,6 +17,7 @@ class CommentServiceImpl (
     private val commentRepository: CommentRepository,
     private val todoRepository: TodoRepository
 ) : CommentService {
+
     override fun createComment(todoId: Long, createCommentRequest: CreateCommentRequest): CommentResponse {
         val targetTodo = todoRepository.findByIdOrNull(todoId)
                 ?: throw TargetNotFoundException("target todo is not found")
@@ -47,5 +50,6 @@ class CommentServiceImpl (
 
     override fun getCommentById(commentId: Long): Comment {
         val comment = commentRepository.findByIdOrNull(commentId) ?: throw ModelNotFoundException("Comment", commentId)
+        return comment
     }
 }

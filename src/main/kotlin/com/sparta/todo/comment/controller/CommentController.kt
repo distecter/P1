@@ -18,8 +18,12 @@ class CommentController (
     fun createComment(
         @RequestParam todoId: Long,
         @RequestBody createCommentRequest: CreateCommentRequest
-    ): ResponseEntity<CommentResponse> {
-        val result = commentService.createComment(todoId, createCommentRequest)
+    ): ResponseEntity<Unit> {
+        val result = commentService.createComment(
+            todoId = createCommentRequest.todoId,
+            nickname = createCommentRequest.nickname,
+            content = createCommentRequest.content
+        )
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(result)
@@ -29,8 +33,11 @@ class CommentController (
     fun updateComment(
         @PathVariable commentId: Long,
         @RequestBody updateCommentRequest: UpdateCommentRequest
-    ): ResponseEntity<CommentResponse> {
-        val updateComment = commentService.updateComment(commentId, updateCommentRequest)
+    ): ResponseEntity<Unit> {
+        val updateComment = commentService.updateComment(
+            commentId = commentId,
+            content = updateCommentRequest.content
+        )
 
         return ResponseEntity
             .status(HttpStatus.OK)

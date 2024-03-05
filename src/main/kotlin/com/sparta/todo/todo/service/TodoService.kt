@@ -5,11 +5,12 @@ import com.sparta.todo.todo.dto.TodoResponse
 import com.sparta.todo.todo.dto.UpdateTodoRequest
 
 interface TodoService {
-    fun createTodo(createTodoRequest: CreateTodoRequest): TodoResponse
 
-    fun getTodo(id: Long): TodoResponse
+    fun createTodo(createTodoRequest: CreateTodoRequest)
 
-    fun getTodos(): List<TodoResponse>
+    fun getAllTodoList(): List<TodoResponse>
+
+    fun getTodoById(id: Long): TodoResponse
 
     fun updateTodo(id: Long, updateTodoRequest: UpdateTodoRequest): TodoResponse
 

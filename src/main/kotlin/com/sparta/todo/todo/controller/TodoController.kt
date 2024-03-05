@@ -28,7 +28,7 @@ class TodoController (
     }
 
     @PostMapping
-    fun createTodo(@RequestBody createTodoRequest: CreateTodoRequest): ResponseEntity<TodoResponse> {
+    fun createTodo(@RequestBody createTodoRequest: CreateTodoRequest): ResponseEntity<Unit> {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(todoService.createTodo(createTodoRequest))
