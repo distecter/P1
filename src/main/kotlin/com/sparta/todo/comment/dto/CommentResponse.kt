@@ -3,17 +3,15 @@ package com.sparta.todo.comment.dto
 import com.sparta.todo.comment.model.Comment
 
 data class CommentResponse (
-    val id: Long,
-    val todoId: Long,
+    val id: Long?,
     val nickname: String,
     val content: String
 ) {
     companion object {
-        fun from(comment: Comment): CommentResponse {
+        fun toCommentResponse(comment: Comment): CommentResponse {
             return CommentResponse(
                 id = comment.id,
-                todoId = comment.todo.id,
-                nickname = comment.member.nickname,
+                nickname = comment.nickname,
                 content = comment.content
             )
         }

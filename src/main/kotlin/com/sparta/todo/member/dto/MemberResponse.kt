@@ -1,6 +1,7 @@
 package com.sparta.todo.member.dto
 
-import java.lang.reflect.Member
+import com.sparta.todo.member.model.Member
+
 
 data class MemberResponse (
     val id: Long,

@@ -8,6 +8,7 @@ import com.sparta.todo.comment.repository.CommentRepository
 import com.sparta.todo.global.exception.ModelNotFoundException
 import com.sparta.todo.global.exception.TargetNotFoundException
 import com.sparta.todo.todo.repository.TodoRepository
+import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -18,30 +19,37 @@ class CommentServiceImpl (
     private val todoRepository: TodoRepository
 ) : CommentService {
 
-    override fun createComment(todoId: Long, createCommentRequest: CreateCommentRequest): CommentResponse {
+    @Transactional
+    override fun createComment(todoId: Long, nickname:String, content: String): CommentResponse{
         val targetTodo = todoRepository.findByIdOrNull(todoId)
-                ?: throw TargetNotFoundException("target todo is not found")
+            ?: throw TargetNotFoundException(
+                targetName = "Todo",
+                id = todoId
+            )
 
         val comment = Comment(
-                content = createCommentRequest.content,
-                todo = targetTodo,
-                createdAt = LocalDateTime.now(),
+            content = content,
+            todo = targetTodo,
+            createdAt = LocalDateTime.now(),
+            nickname = nickname,
+            id = null
         )
-
         val result = commentRepository.save(comment)
 
         return CommentResponse
                 .toCommentResponse(result)
     }
 
-    override fun updateComment(commentId: Long, request: UpdateCommentRequest): CommentResponse {
+    @Transactional
+    override fun updateComment(commentId: Long, content: String): CommentResponse {
         val comment = commentRepository.findByIdOrNull(commentId) ?: throw ModelNotFoundException("Comment", commentId)
 
-        comment.content = request.content
+        comment.content = content
 
         return CommentResponse.toCommentResponse(comment)
     }
 
+    @Transactional
     override fun deleteComment(commentId: Long) {
         val comment = commentRepository.findByIdOrNull(commentId) ?: throw ModelNotFoundException("Comment", commentId)
 

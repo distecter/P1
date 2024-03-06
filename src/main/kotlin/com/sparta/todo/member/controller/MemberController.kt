@@ -15,7 +15,7 @@ class MemberController (
     @PostMapping
     fun createMember(
         @RequestBody createMemberRequest: CreateMemberRequest
-    ): ResponseEntity<Unit> {
+    ): ResponseEntity<MemberResponse> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(memberService.createMember(createMemberRequest))

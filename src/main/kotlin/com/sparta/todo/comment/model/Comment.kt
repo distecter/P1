@@ -6,10 +6,13 @@ import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
 
 @Entity
-data class Comment (
+data class Comment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    var id: Long?,
+
+    @Column(name = "nickname")
+    var nickname: String,
 
     @Column(name = "content")
     var content: String,

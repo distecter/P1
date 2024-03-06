@@ -9,5 +9,5 @@ interface CommentService {
 
     fun deleteComment(commentId: Long)
 
-    fun getCommentById(commentId: Long): Comment
+    fun getCommentById(commentId: Long): CommentResponse
 }

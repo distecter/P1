@@ -5,7 +5,7 @@ import com.sparta.todo.member.dto.MemberResponse
 import com.sparta.todo.member.dto.UpdateMemberRequest
 
 interface MemberService {
-    fun createMember(createMemberRequest: CreateMemberRequest)
+    fun createMember(createMemberRequest: CreateMemberRequest): MemberResponse
 
     fun findById(id: Long): MemberResponse
 

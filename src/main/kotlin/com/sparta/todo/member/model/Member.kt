@@ -7,7 +7,7 @@ import jakarta.persistence.*
 class Member (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    var id: Long,
 
     @Column(name ="email", nullable = false)
     var email: String,
