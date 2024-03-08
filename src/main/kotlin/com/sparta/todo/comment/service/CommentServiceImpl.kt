@@ -20,7 +20,7 @@ class CommentServiceImpl (
 ) : CommentService {
 
     @Transactional
-    override fun createComment(todoId: Long, nickname:String, content: String): CommentResponse{
+    override fun createComment(todoId: Long, nickname: String, content: String): CommentResponse{
         val targetTodo = todoRepository.findByIdOrNull(todoId)
             ?: throw TargetNotFoundException(
                 targetName = "Todo",
